@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ذكرى ميلاد سُنْدُس</title>
+    <meta name="description" content="صفحة تهنئة تفاعلية بمناسبة عيد ميلاد سندس، تضم رسالة شخصية ومعرض صور وكعكة ثلاثية الأبعاد.">
+    
+    <!-- تحميل Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- تحميل خطوط عربية فاخرة (Amiri للعناوين الأدبية و Cairo للنصوص العصرية) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'amiri': ['Amiri', 'serif'],
+                        'cairo': ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        'obsidian': '#0f0b0d',
+                        'velvet': '#1a1116',
+                        'burgundy': '#2d1620',
+                        'rose-gold': '#d4af37',
+                        'champagne': '#f3e5ab',
+                        'blush-muted': '#c9969c',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* تنسيقات أساسية وتأثيرات حركية ناعمة */
+        body {
+            background-color: #0f0b0d;
+            color: #f8f4f0;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* خلفية متدرجة فاخرة */
+        .luxury-bg {
+            background: radial-gradient(circle at 50% 20%, #2d1620 0%, #160e12 55%, #0a0709 100%);
+        }
+
+        /* تدرج ذهبي للنصوص */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* إطار ذهبي خفيف */
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* انتقالات الصفحات */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .page-section.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            animation: pageEnter 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+        }
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: translateY(24px) scale(0.985); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        .top-nav {
+            max-width: calc(100vw - 130px);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .top-nav::-webkit-scrollbar { display: none; }
+        .top-nav .nav-link { flex-shrink: 0; white-space: nowrap; }
+
+        #page-1 .hero-ornament { margin-bottom: 0.75rem; }
+        #page-1 .hero-intro { margin-bottom: 1.5rem; }
+        #page-1 .hero-title {
+            display: inline-block;
+            font-size: clamp(2.6rem, 6vw, 4.5rem);
+            line-height: 1.65;
+            padding: 0.12em 0.2em 0.22em;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0;
+            word-spacing: 0;
+        }
+
+        .memory-frame {
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+            transition: transform 450ms cubic-bezier(0.2, 0.75, 0.25, 1), box-shadow 450ms ease;
+        }
+        .memory-frame:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 26px 52px rgba(212, 175, 55, 0.16);
+        }
+        .memory-frame img { transition: transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1); }
+        .memory-frame:hover img { transform: scale(1.055); }
+
+        @media (max-width: 640px) {
+            header .max-w-6xl { gap: 10px; }
+            .top-nav { max-width: calc(100vw - 108px); }
+            .top-nav .nav-link { padding-inline: 10px; }
+            #page-1 .hero-title { font-size: clamp(2.6rem, 11vw, 3.5rem); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* الأشكال الهندسية لمعرض الصور */
+        .shape-arch {
+            border-radius: 9999px 9999px 16px 16px;
+        }
+
+        .shape-circle {
+            border-radius: 9999px;
+        }
+
+        .shape-hexagon {
+            clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+        }
+
+        .shape-oval {
+            border-radius: 50% / 40%;
+        }
+
+        /* تأثير نبض ناعم للزخارف */
+        @keyframes slowPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.03); }
+        }
+        .animate-slow-pulse {
+            animation: slowPulse 6s infinite ease-in-out;
+        }
+
+        /* حاوية المشهد ثلاثي الأبعاد */
+        #canvas-container {
+            width: 100%;
+            height: 62vh;
+            min-height: 420px;
+            max-height: 650px;
+            position: relative;
+            cursor: grab;
+        }
+        #canvas-container:active {
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body class="luxury-bg min-h-screen flex flex-col justify-between selection:bg-rose-gold selection:text-obsidian">
+
+    <!-- شريط التنقل العلوي الفاخر -->
+    <header class="w-full sticky top-0 z-50 backdrop-blur-md bg-obsidian/70 border-b border-rose-gold/20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+            <!-- الشعار النصي -->
+            <button onclick="navigateTo(1)" class="flex items-center gap-3 focus:outline-none group">
+                <svg class="w-7 h-7 text-rose-gold transition-transform duration-500 group-hover:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span class="font-amiri text-2xl sm:text-3xl font-bold text-gold-gradient">سُنْدُس</span>
+            </button>
+
+            <!-- روابط الصفحات الأربع -->
+            <nav class="top-nav flex items-center gap-1 sm:gap-3 md:gap-6">
+                <button onclick="navigateTo(1)" id="nav-btn-1" class="nav-link px-3 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 text-champagne bg-rose-gold/20 border border-rose-gold/40">
+                    الترحيب
+                </button>
+                <button onclick="navigateTo(2)" id="nav-btn-2" class="nav-link px-3 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 text-stone-400 hover:text-champagne">
+                    رسالة تهنئة
+                </button>
+                <button onclick="navigateTo(3)" id="nav-btn-3" class="nav-link px-3 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 text-stone-400 hover:text-champagne">
+                    معرض الصور
+                </button>
+                <button onclick="navigateTo(4)" id="nav-btn-4" class="nav-link px-3 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 text-stone-400 hover:text-champagne">
+                    كعكة الميلاد
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي للصفحات -->
+    <main class="flex-grow flex items-center justify-center w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-12 relative">
+        
+        <!-- زخارف هندسية خلفية ثابتة -->
+        <div class="pointer-events-none fixed inset-0 overflow-hidden z-0">
+            <div class="absolute top-1/4 -right-24 w-96 h-96 rounded-full bg-rose-gold/5 blur-3xl animate-slow-pulse"></div>
+            <div class="absolute bottom-1/4 -left-24 w-96 h-96 rounded-full bg-blush-muted/10 blur-3xl animate-slow-pulse" style="animation-delay: 3s;"></div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- الصفحة الأولى: الترحيب الفاخر                             -->
+        <!-- ========================================================= -->
+        <section id="page-1" class="page-section active w-full flex-col items-center justify-center text-center z-10 py-6">
+            <div class="relative max-w-3xl w-full p-6 sm:p-10 md:p-12">
+                
+                <!-- زخرفة هندسية علوية SVG -->
+                <div class="hero-ornament flex justify-center">
+                    <svg class="w-32 h-10 text-rose-gold" viewBox="0 0 160 40" fill="none">
+                        <line x1="0" y1="20" x2="60" y2="20" stroke="currentColor" stroke-width="0.75" stroke-opacity="0.5"/>
+                        <polygon points="80,6 94,20 80,34 66,20" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                        <circle cx="80" cy="20" r="3" fill="currentColor"/>
+                        <line x1="100" y1="20" x2="160" y2="20" stroke="currentColor" stroke-width="0.75" stroke-opacity="0.5"/>
+                    </svg>
+                </div>
+
+                <p class="hero-intro text-blush-muted text-sm sm:text-base uppercase font-light">
+                    إهداء خاص في يوم استثنائي
+                </p>
+
+                <h1 class="hero-title font-amiri font-bold text-gold-gradient">
+                    سُنْدُس
+                </h1>
+
+                <div class="w-24 h-px bg-gradient-to-r from-transparent via-rose-gold to-transparent mx-auto mb-8"></div>
+
+                <h2 class="font-amiri text-2xl sm:text-3xl md:text-4xl text-champagne/95 mb-6 leading-relaxed">
+                    أهلاً بكِ في مساحة صُممت لتحتفي بجمال روحكِ وذكرى ميلادكِ
+                </h2>
+
+                <p class="text-stone-300 text-base sm:text-lg max-w-xl mx-auto leading-loose mb-10 font-light">
+                    يومٌ يزدانُ بقدومكِ، وتشرقُ فيه الأمنيات الصادقة بعامٍ جديد يحمل لكِ من السعادة والرفعة بقدر نقاء قلبكِ.
+                </p>
+
+                <button onclick="navigateTo(2)" class="group inline-flex items-center gap-4 px-8 py-4 rounded-full bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#b8860b] text-obsidian font-bold text-base sm:text-lg shadow-lg shadow-rose-gold/20 hover:shadow-rose-gold/40 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <span>اقرئي رسالة التهنئة</span>
+                    <svg class="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- الصفحة الثانية: كلمة وتهنئة أدبية راقية                  -->
+        <!-- ========================================================= -->
+        <section id="page-2" class="page-section w-full flex-col items-center justify-center z-10 py-4">
+            <div class="relative max-w-4xl w-full p-4 sm:p-8 md:p-12">
+                <div class="text-center mb-10">
+                    <span class="text-blush-muted text-sm block mb-2">في ذكرى ميلادكِ</span>
+                    <h2 class="font-amiri text-3xl sm:text-5xl font-bold text-gold-gradient">
+                        إلى الغالية سُنْدُس
+                    </h2>
+                </div>
+
+                <div class="space-y-6 font-amiri text-xl sm:text-2xl md:text-[26px] text-stone-100 leading-[2] text-justify sm:text-center px-2 sm:px-6">
+                    <p>
+                        كل عامٍ وأنتِ بخيرٍ يا <span class="text-champagne font-bold">سُنْدُس</span>، يا من يشبه حضورها رقة الاسم وجمال المعنى. في هذا اليوم المميز الذي أضاءت فيه الحياة بقدومكِ، تتسابق الكلمات لتصوغ لكِ أصدق التهاني وأرقّ الأمنيات.
+                    </p>
+                    <p>
+                        نتمنى لكِ عاماً جديداً يُزهر فيه دربكِ بالنجاح والتوفيق، وتتحقق فيه كل أحلامكِ التي طالما سعيتِ إليها. أدام الله عليكِ نعمة الصحة والعافية، وملأ أيامكِ بالسكينة والفرح الذي لا يغيب، وجعل السعادة رفيقةً لخطواتكِ في كل حين.
+                    </p>
+                    <p class="text-champagne pt-2">
+                        دمتِ متألقةً، ملهمةً، ومحل فخرٍ واعتزازٍ لكل من حولكِ. عامٌ سعيد وعمرٌ مديد يفيض بالخير والبركات.
+                    </p>
+                </div>
+
+                <!-- فاصل وتوقيع -->
+                <div class="mt-12 pt-8 border-t border-rose-gold/20 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div class="text-right">
+                        <p class="text-sm text-blush-muted">بأصدق الأمنيات وأطيب التبريكات</p>
+                        <p class="font-amiri text-xl text-champagne mt-1">ذكرى ميلاد سعيدة</p>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <button onclick="navigateTo(1)" class="px-5 py-2.5 rounded-full gold-border text-stone-300 hover:text-champagne hover:bg-rose-gold/10 transition-all text-sm">
+                            السابق
+                        </button>
+                        <button onclick="navigateTo(3)" class="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-rose-gold/20 hover:bg-rose-gold/30 border border-rose-gold/50 text-champagne transition-all text-sm sm:text-base">
+                            <span>الانتقال إلى معرض الصور</span>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- الصفحة الثالثة: معرض الصور بأشكال هندسية جاهزة للإضافة    -->
+        <!-- ========================================================= -->
+        <section id="page-3" class="page-section w-full flex-col items-center justify-center z-10 py-4">
+            <div class="w-full max-w-5xl">
+                <div class="text-center mb-10">
+                    <h2 class="font-amiri text-3xl sm:text-4xl md:text-5xl font-bold text-gold-gradient leading-tight">
+                        
+                    </h2>
+                </div>
+
+                <!-- الصور الأربع المرفقة -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-center justify-items-center mb-12">
+                    
+                    <!-- الصورة الأولى -->
+                    <div class="w-full max-w-[240px] flex flex-col items-center">
+                        <div class="memory-frame relative w-full aspect-[3/4] rounded-3xl bg-[#f3efeb] border border-rose-gold/40 overflow-hidden group flex items-center justify-center">
+                            <img src="photo-1.png" alt="بطاقة تهنئة: يولد الملوك والأميرات في شهر 11" loading="lazy" decoding="async" class="w-full h-full object-contain">
+                            <div id="placeholder-1" class="hidden flex-col items-center justify-center text-rose-gold/70 group-hover:text-rose-gold transition-colors">
+                                <svg class="w-10 h-10 stroke-[1.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-champagne/80">مواليد شهر نوفمبر</p>
+                    </div>
+
+                    <!-- الصورة الثانية -->
+                    <div class="w-full max-w-[240px] flex flex-col items-center">
+                        <div class="memory-frame relative w-full aspect-[3/4] rounded-3xl bg-[#f3efeb] border border-rose-gold/40 overflow-hidden group flex items-center justify-center">
+                            <img src="photo-2.png" alt="رسم كعكة وقلوب مع تهنئة بعيد الميلاد" loading="lazy" decoding="async" class="w-full h-full object-contain">
+                            <div id="placeholder-2" class="hidden flex-col items-center justify-center text-rose-gold/70 group-hover:text-rose-gold transition-colors">
+                                <svg class="w-10 h-10 stroke-[1.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-champagne/80">حكاية يوم ميلادكِ</p>
+                    </div>
+
+                    <!-- الصورة الثالثة -->
+                    <div class="w-full max-w-[240px] flex flex-col items-center">
+                        <div class="w-full aspect-[3/4] p-[2px] bg-rose-gold/40 hover:bg-rose-gold transition-colors duration-300 rounded-3xl shadow-xl">
+                            <div class="memory-frame relative w-full h-full rounded-3xl bg-[#f3efeb] overflow-hidden group flex items-center justify-center">
+                                    <img src="photo-3.png" alt="بطاقة تهنئة بعيد ميلاد سندس مع بالونات وكعكة" loading="lazy" decoding="async" class="w-full h-full object-contain">
+                                    <div id="placeholder-3" class="hidden flex-col items-center justify-center text-rose-gold/70 group-hover:text-rose-gold transition-colors">
+                                    <svg class="w-10 h-10 stroke-[1.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-champagne/80">يومكِ السعيد</p>
+                    </div>
+
+                    <!-- الصورة الرابعة: لافتة مضيئة بأبعادها الأصلية -->
+                    <div class="w-full max-w-[240px] flex flex-col items-center">
+                        <div class="memory-frame relative w-full aspect-[9/16] rounded-3xl bg-[#080808] border border-rose-gold/40 overflow-hidden group flex items-center justify-center">
+                            <img src="photo-4.png" alt="لافتة مضيئة مكتوب عليها Happy Birthday Sondos" width="576" height="1024" loading="lazy" decoding="async" class="w-full h-full object-contain">
+                            <div id="placeholder-4" class="hidden flex-col items-center justify-center text-rose-gold/70 group-hover:text-rose-gold transition-colors">
+                                <svg class="w-10 h-10 stroke-[1.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-champagne/80">عيد ميلاد سعيد يا سُنْدُس</p>
+                    </div>
+
+                </div>
+
+                <!-- أزرار التنقل -->
+                <div class="flex items-center justify-center gap-4">
+                    <button onclick="navigateTo(2)" class="px-6 py-3 rounded-full gold-border text-stone-300 hover:text-champagne hover:bg-rose-gold/10 transition-all text-sm">
+                        السابق
+                    </button>
+                    <button onclick="navigateTo(4)" class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#b8860b] text-obsidian font-bold text-sm sm:text-base shadow-lg shadow-rose-gold/20 hover:shadow-rose-gold/40 transition-all">
+                        <span>التالي</span>
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- الصفحة الرابعة: كعكة عيد الميلاد ثلاثية الأبعاد الحقيقية   -->
+        <!-- ========================================================= -->
+        <section id="page-4" class="page-section w-full flex-col items-center justify-center z-10">
+            <div class="w-full max-w-5xl flex flex-col">
+                
+                <!-- رأس الصفحة الرابعة -->
+                <div class="pt-6 px-6 text-center">
+                    <h2 class="font-amiri text-3xl sm:text-4xl font-bold text-gold-gradient">
+                        تمنّي أمنية يا سُنْدُس
+                    </h2>
+                    <p id="cake-instruction" class="text-stone-300 text-xs sm:text-sm mt-1">
+                        
+                    </p>
+                </div>
+
+                <!-- حاوية العرض ثلاثي الأبعاد WebGL -->
+                <div id="canvas-container" class="w-full relative">
+                    <!-- رسالة احتفالية تظهر بعد إطفاء الشموع -->
+                    <div id="wish-celebration" class="pointer-events-none opacity-0 transition-opacity duration-1000 absolute inset-x-0 top-6 flex justify-center z-20 px-4">
+                        <div class="px-8 py-3 rounded-full bg-obsidian/80 border border-rose-gold/60 backdrop-blur-md shadow-2xl">
+                            <p class="font-amiri text-xl sm:text-2xl text-champagne text-center">
+                                كل عام وأنتِ بألف خير يا سُنْدُس، تحققت أمانيكِ بإذن الله
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- شريط التحكم التفاعلي للكعكة -->
+                <div class="p-5 flex flex-wrap items-center justify-center gap-4">
+                    <button id="blow-candles-btn" onclick="toggleCandles()" class="px-8 py-3 rounded-full bg-gradient-to-r from-[#b8860b] via-[#d4af37] to-[#b8860b] text-obsidian font-bold text-sm sm:text-base shadow-lg shadow-rose-gold/20 hover:shadow-rose-gold/40 transition-all transform active:scale-95">
+                        إطفاء الشموع
+                    </button>
+                    
+                    <button onclick="resetCameraView()" class="px-5 py-3 rounded-full gold-border text-champagne hover:bg-rose-gold/10 transition-all text-xs sm:text-sm">
+                        إعادة ضبط الزاوية
+                    </button>
+
+                    <button onclick="navigateTo(3)" class="px-5 py-3 rounded-full text-stone-400 hover:text-champagne transition-all text-xs sm:text-sm">
+                        العودة للمعرض
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- تذييل بسيط وأنيق -->
+    <footer class="w-full py-5 text-center border-t border-rose-gold/10 z-10">
+        <p class="font-amiri text-base sm:text-lg font-bold text-champagne">صُمم بكل ودّ احتفاءً بذكرى ميلادك يا سُنْدُس</p>
+    </footer>
+
+    <!-- السكربت البرمجي للتنقل وبناء المشهد ثلاثي الأبعاد -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // ==========================================
+        // 1. إدارة التنقل بين الصفحات الأربع
+        // ==========================================
+        let currentPage = 1;
+        let isThreeInitialized = false;
+
+        function navigateTo(pageNumber) {
+            if (pageNumber === currentPage) return;
+
+            // إخفاء الصفحة الحالية
+            const currentSection = document.getElementById(`page-${currentPage}`);
+            if (currentSection) {
+                currentSection.classList.remove('active');
+            }
+
+            // تحديث أزرار شريط التنقل
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`nav-btn-${i}`);
+                if (i === pageNumber) {
+                    btn.className = "nav-link px-3 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 text-champagne bg-rose-gold/20 border border-rose-gold/40";
+                } else {
+                    btn.className = "nav-link px-3 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 text-stone-400 hover:text-champagne";
+                }
+            }
+
+            // إظهار الصفحة المطلوبة
+            currentPage = pageNumber;
+            const nextSection = document.getElementById(`page-${pageNumber}`);
+            if (nextSection) {
+                nextSection.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+
+            // تهيئة المشهد ثلاثي الأبعاد عند فتح الصفحة الرابعة لأول مرة
+            if (pageNumber === 4) {
+                if (!isThreeInitialized) {
+                    init3DCakeScene();
+                    isThreeInitialized = true;
+                } else {
+                    onWindowResize();
+                }
+            }
+        }
+
+        // ==========================================
+        // 2. بناء كعكة عيد الميلاد ثلاثية الأبعاد (Three.js)
+        // ==========================================
+        let scene, camera, renderer, controls, cakeResizeObserver;
+        let cakeGroup, flames = [], candleLights = [], smokeParticles = [], goldConfetti = [];
+        let candlesLit = true;
+        const timer = new THREE.Timer();
+        timer.connect(document);
+
+        function init3DCakeScene() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // 1. إنشاء المشهد
+            scene = new THREE.Scene();
+
+            // 2. إعداد الكاميرا
+            camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+            camera.position.set(0, 5.2, 10.5);
+
+            // 3. إعداد المُصيّر (Renderer) بظلال وتنعيم حواف عالي الجودة
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.3;
+            container.appendChild(renderer.domElement);
+
+            // 4. التحكم التفاعلي بالماوس واللمس (OrbitControls)
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.06;
+            controls.minDistance = 5.5;
+            controls.maxDistance = 22;
+            controls.maxPolarAngle = Math.PI / 2 - 0.05; // منع النزول أسفل الطاولة
+            controls.target.set(0, 1.8, 0);
+
+            // 5. الإضاءة الواقعية
+            const ambientLight = new THREE.AmbientLight(0xffe8d6, 0.8);
+            scene.add(ambientLight);
+
+            const mainSpotLight = new THREE.SpotLight(0xfff0dd, 1.9);
+            mainSpotLight.position.set(6, 12, 8);
+            mainSpotLight.angle = Math.PI / 4;
+            mainSpotLight.penumbra = 0.5;
+            mainSpotLight.castShadow = true;
+            mainSpotLight.shadow.mapSize.width = 1024;
+            mainSpotLight.shadow.mapSize.height = 1024;
+            scene.add(mainSpotLight);
+
+            const rimLight = new THREE.DirectionalLight(0xd4af37, 0.85);
+            rimLight.position.set(-7, 6, -6);
+            scene.add(rimLight);
+
+            const frontFillLight = new THREE.PointLight(0xffd1a3, 1.4, 16);
+            frontFillLight.position.set(0, 5.5, 9);
+            scene.add(frontFillLight);
+
+            // 6. بناء المجسمات (القاعدة + الكعكة متعددة الطبقات + التزيين + الاسم + الشموع)
+            cakeGroup = new THREE.Group();
+            scene.add(cakeGroup);
+
+            buildCakeStand();
+            buildCakeLayers();
+            buildNamePlaque();
+            buildCandles();
+            buildAmbientParticles();
+
+            // الاستماع لتغيير حجم الشاشة
+            window.addEventListener('resize', onWindowResize);
+            cakeResizeObserver = new ResizeObserver(onWindowResize);
+            cakeResizeObserver.observe(container);
+
+            // بدء حلقة الرسم المتحركة
+            onWindowResize();
+            animate3D();
+        }
+
+        // بناء طبق التقديم الفاخر
+        function buildCakeStand() {
+            const standMaterial = new THREE.MeshStandardMaterial({
+                color: 0xd4af37,
+                metalness: 0.85,
+                roughness: 0.2,
+            });
+
+            const marbleMaterial = new THREE.MeshStandardMaterial({
+                color: 0xfbf8f3,
+                roughness: 0.15,
+                metalness: 0.05,
+            });
+
+            // سطح الطبق العلوي
+            const plateGeo = new THREE.CylinderGeometry(3.8, 3.6, 0.18, 64);
+            const plate = new THREE.Mesh(plateGeo, marbleMaterial);
+            plate.position.y = 0.6;
+            plate.receiveShadow = true;
+            cakeGroup.add(plate);
+
+            // إطار ذهبي حول الطبق
+            const rimGeo = new THREE.TorusGeometry(3.8, 0.06, 16, 64);
+            const rim = new THREE.Mesh(rimGeo, standMaterial);
+            rim.rotation.x = Math.PI / 2;
+            rim.position.y = 0.68;
+            cakeGroup.add(rim);
+
+            // ساق الحامل
+            const stemGeo = new THREE.CylinderGeometry(0.45, 0.75, 0.5, 32);
+            const stem = new THREE.Mesh(stemGeo, standMaterial);
+            stem.position.y = 0.3;
+            stem.castShadow = true;
+            cakeGroup.add(stem);
+
+            // قاعدة الحامل السفلية
+            const baseGeo = new THREE.CylinderGeometry(1.6, 1.8, 0.12, 48);
+            const base = new THREE.Mesh(baseGeo, standMaterial);
+            base.position.y = 0.06;
+            base.receiveShadow = true;
+            cakeGroup.add(base);
+        }
+
+        // بناء طبقات الكعكة والكريمة واللآلئ الذهبية
+        function buildCakeLayers() {
+            const textureCanvas = document.createElement('canvas');
+            textureCanvas.width = 512;
+            textureCanvas.height = 512;
+            const textureContext = textureCanvas.getContext('2d');
+            textureContext.fillStyle = '#653522';
+            textureContext.fillRect(0, 0, 512, 512);
+
+            for (let band = 0; band < 34; band++) {
+                const x = (band * 97) % 512;
+                textureContext.fillStyle = band % 2 ? 'rgba(24, 8, 5, 0.1)' : 'rgba(230, 150, 90, 0.16)';
+                textureContext.fillRect(x, 0, 3 + (band % 5) * 2, 512);
+            }
+            for (let fleck = 0; fleck < 2400; fleck++) {
+                const x = (fleck * 193) % 512;
+                const y = (fleck * 317) % 512;
+                textureContext.fillStyle = fleck % 3 ? 'rgba(25, 9, 6, 0.12)' : 'rgba(230, 160, 100, 0.12)';
+                textureContext.fillRect(x, y, 1 + (fleck % 2), 1 + (fleck % 2));
+            }
+
+            const spongeTexture = new THREE.CanvasTexture(textureCanvas);
+            spongeTexture.colorSpace = THREE.SRGBColorSpace;
+            spongeTexture.wrapS = THREE.RepeatWrapping;
+            spongeTexture.repeat.set(3, 1);
+
+            const spongeMat = new THREE.MeshPhysicalMaterial({
+                map: spongeTexture,
+                roughness: 0.54,
+                clearcoat: 0.08,
+                clearcoatRoughness: 0.45
+            });
+            const ganacheMat = new THREE.MeshPhysicalMaterial({
+                color: 0x57251a,
+                roughness: 0.2,
+                clearcoat: 0.72,
+                clearcoatRoughness: 0.18
+            });
+            const chocolateDropMat = new THREE.MeshPhysicalMaterial({
+                color: 0x70402b,
+                roughness: 0.23,
+                clearcoat: 0.58,
+                clearcoatRoughness: 0.2
+            });
+            const creamFillingMat = new THREE.MeshPhysicalMaterial({
+                color: 0xf2d7b4,
+                roughness: 0.42
+            });
+            const darkChocolateMat = new THREE.MeshPhysicalMaterial({
+                color: 0x381a11,
+                roughness: 0.2,
+                clearcoat: 0.6
+            });
+            const milkChocolateMat = new THREE.MeshPhysicalMaterial({
+                color: 0x8a5234,
+                roughness: 0.24,
+                clearcoat: 0.45
+            });
+            const sprinkleMats = [
+                new THREE.MeshStandardMaterial({ color: 0xe8c878, metalness: 0.45, roughness: 0.3 }),
+                new THREE.MeshStandardMaterial({ color: 0xd17a51, roughness: 0.35 }),
+                new THREE.MeshStandardMaterial({ color: 0xffe8c1, roughness: 0.38 })
+            ];
+
+            const tiers = [
+                { radius: 2.62, height: 1.5, baseY: 0.72 },
+                { radius: 1.92, height: 1.2, baseY: 2.22 },
+                { radius: 1.25, height: 0.95, baseY: 3.42 }
+            ];
+
+            tiers.forEach(({ radius, height, baseY }) => {
+                const profile = [
+                    new THREE.Vector2(0, 0),
+                    new THREE.Vector2(radius - 0.12, 0),
+                    new THREE.Vector2(radius - 0.035, 0.035),
+                    new THREE.Vector2(radius, 0.12),
+                    new THREE.Vector2(radius, height - 0.12),
+                    new THREE.Vector2(radius - 0.035, height - 0.035),
+                    new THREE.Vector2(radius - 0.12, height),
+                    new THREE.Vector2(0, height)
+                ];
+                const tier = new THREE.Mesh(new THREE.LatheGeometry(profile, 128), spongeMat);
+                tier.position.y = baseY;
+                tier.castShadow = true;
+                tier.receiveShadow = true;
+                cakeGroup.add(tier);
+
+                const filling = new THREE.Mesh(
+                    new THREE.TorusGeometry(radius - 0.008, 0.055, 12, 128),
+                    creamFillingMat
+                );
+                filling.rotation.x = Math.PI / 2;
+                filling.position.y = baseY + 0.24;
+                cakeGroup.add(filling);
+
+                const cap = new THREE.Mesh(
+                    new THREE.CylinderGeometry(radius - 0.07, radius - 0.07, 0.09, 128),
+                    ganacheMat
+                );
+                cap.position.y = baseY + height - 0.035;
+                cap.castShadow = true;
+                cakeGroup.add(cap);
+
+                const dripVertices = [];
+                const dripIndices = [];
+                const dripSegments = 256;
+                const icingTop = baseY + height - 0.06;
+                for (let i = 0; i <= dripSegments; i++) {
+                    const angle = (i / dripSegments) * Math.PI * 2;
+                    const dripLength = 0.08 + 0.3 * Math.pow(Math.max(0, Math.cos(angle * 10 + 0.4)), 10);
+                    const edgeRadius = radius + 0.012;
+                    dripVertices.push(
+                        Math.cos(angle) * edgeRadius, icingTop, Math.sin(angle) * edgeRadius,
+                        Math.cos(angle) * edgeRadius, icingTop - dripLength, Math.sin(angle) * edgeRadius
+                    );
+                    if (i < dripSegments) {
+                        const vertex = i * 2;
+                        dripIndices.push(vertex, vertex + 2, vertex + 1, vertex + 2, vertex + 3, vertex + 1);
+                    }
+                }
+                const dripGeometry = new THREE.BufferGeometry();
+                dripGeometry.setAttribute('position', new THREE.Float32BufferAttribute(dripVertices, 3));
+                dripGeometry.setIndex(dripIndices);
+                dripGeometry.computeVertexNormals();
+                cakeGroup.add(new THREE.Mesh(
+                    dripGeometry,
+                    new THREE.MeshPhysicalMaterial({
+                        color: 0x67301f,
+                        roughness: 0.2,
+                        clearcoat: 0.62,
+                        side: THREE.DoubleSide
+                    })
+                ));
+
+                for (let i = 0; i < 20; i++) {
+                    const angle = (i / 20) * Math.PI * 2 + 0.04;
+                    const dripLength = 0.12 + 0.28 * Math.pow(Math.max(0, Math.cos(angle * 10 + 0.4)), 10);
+                    const drop = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), chocolateDropMat);
+                    drop.scale.set(0.075, dripLength * 0.48, 0.075);
+                    drop.position.set(
+                        Math.cos(angle) * (radius + 0.015),
+                        icingTop - dripLength * 0.88,
+                        Math.sin(angle) * (radius + 0.015)
+                    );
+                    cakeGroup.add(drop);
+                }
+            });
+
+            const topY = 4.38;
+            const truffleGeometry = new THREE.SphereGeometry(0.17, 24, 20);
+            for (let i = 0; i < 7; i++) {
+                const angle = (i / 7) * Math.PI * 2;
+                const truffle = new THREE.Mesh(truffleGeometry, i % 2 ? darkChocolateMat : milkChocolateMat);
+                truffle.position.set(Math.cos(angle) * 0.78, topY + 0.16, Math.sin(angle) * 0.78);
+                truffle.scale.set(1, 0.84, 1);
+                truffle.castShadow = true;
+                cakeGroup.add(truffle);
+
+                const curlPoints = [];
+                for (let point = 0; point <= 28; point++) {
+                    const t = (point / 28) * Math.PI * 3.5;
+                    const radius = 0.13 * (1 - point / 38);
+                    curlPoints.push(new THREE.Vector3(
+                        Math.cos(angle) * 0.8 + Math.cos(t) * radius,
+                        topY + 0.25 + (point / 28) * 0.17,
+                        Math.sin(angle) * 0.8 + Math.sin(t) * radius
+                    ));
+                }
+                cakeGroup.add(new THREE.Mesh(
+                    new THREE.TubeGeometry(new THREE.CatmullRomCurve3(curlPoints), 48, 0.028, 8, false),
+                    i % 2 ? milkChocolateMat : darkChocolateMat
+                ));
+            }
+
+            const sprinkleGeometry = new THREE.CapsuleGeometry(0.018, 0.11, 3, 6);
+            for (let i = 0; i < 38; i++) {
+                const angle = i * 2.399;
+                const radius = 0.2 + (i % 5) * 0.085;
+                const sprinkle = new THREE.Mesh(sprinkleGeometry, sprinkleMats[i % sprinkleMats.length]);
+                sprinkle.position.set(
+                    Math.cos(angle) * radius,
+                    topY + 0.018,
+                    Math.sin(angle) * radius
+                );
+                sprinkle.rotation.y = angle;
+                sprinkle.rotation.z = (i % 2 ? 1 : -1) * 0.3;
+                cakeGroup.add(sprinkle);
+            }
+
+            const pearlMat = new THREE.MeshStandardMaterial({
+                color: 0xe6c777,
+                metalness: 0.55,
+                roughness: 0.28
+            });
+            const pearlGeometry = new THREE.SphereGeometry(0.05, 12, 10);
+            for (let i = 0; i < 36; i++) {
+                const angle = (i / 36) * Math.PI * 2;
+                const pearl = new THREE.Mesh(pearlGeometry, pearlMat);
+                pearl.position.set(Math.cos(angle) * 2.64, 0.78, Math.sin(angle) * 2.64);
+                cakeGroup.add(pearl);
+            }
+        }
+
+        // إنشاء لوحة باسم "سندس" مثبتة على واجهة الكعكة باستخدام نسيج Canvas عالي الدقة
+        function buildNamePlaque() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+
+            // خلفية اللوحة الملكية
+            ctx.fillStyle = '#1f1218';
+            ctx.beginPath();
+            ctx.roundRect(16, 16, 480, 224, 90);
+            ctx.fill();
+
+            // إطار ذهبي مزدوج
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 8;
+            ctx.stroke();
+
+            ctx.strokeStyle = '#f3e5ab';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.roundRect(28, 28, 456, 200, 78);
+            ctx.stroke();
+
+            // كتابة اسم سندس بخط عربي واضح وأنيق
+            ctx.fillStyle = '#f3e5ab';
+            ctx.font = 'bold 104px Amiri, serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.direction = 'rtl';
+            ctx.fillText('سُنْدُس', 256, 132, 440);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.anisotropy = 8;
+
+            const plaqueGeo = new THREE.BoxGeometry(1.5, 0.75, 0.08);
+            const plaqueMat = [
+                new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 }),
+                new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 }),
+                new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 }),
+                new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 }),
+                new THREE.MeshStandardMaterial({ map: texture, roughness: 0.3 }), // الوجه الأمامي
+                new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 }),
+            ];
+
+            const plaque = new THREE.Mesh(plaqueGeo, plaqueMat);
+            plaque.position.set(0, 1.45, 2.67);
+            plaque.rotation.x = -0.06;
+            cakeGroup.add(plaque);
+        }
+
+        // بناء الشموع المضيئة بلهب متحرك وإضاءة نقطية دافئة
+        function buildCandles() {
+            const candlePositions = [
+                { x: 0, z: 0, height: 0.95 },
+                { x: -0.55, z: 0.35, height: 0.8 },
+                { x: 0.55, z: 0.35, height: 0.8 },
+                { x: -0.45, z: -0.45, height: 0.85 },
+                { x: 0.45, z: -0.45, height: 0.85 },
+            ];
+
+            const candleMat = new THREE.MeshStandardMaterial({
+                color: 0xfff8e7,
+                roughness: 0.25,
+            });
+
+            const stripeMat = new THREE.MeshStandardMaterial({
+                color: 0xd4af37,
+                metalness: 0.8,
+                roughness: 0.2
+            });
+
+            const wickMat = new THREE.MeshBasicMaterial({ color: 0x1a1a1a });
+
+            candlePositions.forEach((pos) => {
+                const candleGroup = new THREE.Group();
+                candleGroup.position.set(pos.x, 4.37, pos.z);
+
+                // جسم الشمعة
+                const bodyGeo = new THREE.CylinderGeometry(0.065, 0.065, pos.height, 20);
+                const body = new THREE.Mesh(bodyGeo, candleMat);
+                body.position.y = pos.height / 2;
+                body.castShadow = true;
+                candleGroup.add(body);
+
+                // حلقة ذهبية أسفل الشمعة
+                const holderGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.06, 20);
+                const holder = new THREE.Mesh(holderGeo, stripeMat);
+                holder.position.y = 0.03;
+                candleGroup.add(holder);
+
+                // الفتيل
+                const wickGeo = new THREE.CylinderGeometry(0.012, 0.012, 0.12, 8);
+                const wick = new THREE.Mesh(wickGeo, wickMat);
+                wick.position.y = pos.height + 0.06;
+                candleGroup.add(wick);
+
+                // اللهب ثلاثي الأبعاد
+                const flameGeo = new THREE.SphereGeometry(0.075, 16, 16);
+                flameGeo.scale(0.65, 1.7, 0.65);
+                const flameMat = new THREE.MeshBasicMaterial({
+                    color: 0xffb703,
+                    transparent: true,
+                    opacity: 0.95
+                });
+                const flame = new THREE.Mesh(flameGeo, flameMat);
+                flame.position.y = pos.height + 0.2;
+                candleGroup.add(flame);
+                flames.push(flame);
+
+                // نواة اللهب الساطعة
+                const innerFlameGeo = new THREE.SphereGeometry(0.035, 12, 12);
+                innerFlameGeo.scale(0.6, 1.5, 0.6);
+                const innerFlameMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                const innerFlame = new THREE.Mesh(innerFlameGeo, innerFlameMat);
+                innerFlame.position.y = -0.02;
+                flame.add(innerFlame);
+
+                // إضاءة دافئة منبثقة من الشمعة
+                const light = new THREE.PointLight(0xffaa33, 0.75, 5.5);
+                light.position.y = pos.height + 0.25;
+                candleGroup.add(light);
+                candleLights.push(light);
+
+                cakeGroup.add(candleGroup);
+            });
+        }
+
+        // بناء جسيمات ذهبية محيطة في الفضاء لإضفاء طابع احتفالي راقٍ
+        function buildAmbientParticles() {
+            const count = 90;
+            const geo = new THREE.OctahedronGeometry(0.045, 0);
+            const mat = new THREE.MeshStandardMaterial({
+                color: 0xf3e5ab,
+                emissive: 0xd4af37,
+                emissiveIntensity: 0.4,
+                metalness: 0.9,
+                roughness: 0.1
+            });
+
+            for (let i = 0; i < count; i++) {
+                const particle = new THREE.Mesh(geo, mat);
+                const radius = 3.5 + Math.random() * 4.5;
+                const theta = Math.random() * Math.PI * 2;
+                const y = 0.5 + Math.random() * 6.5;
+
+                particle.position.set(Math.cos(theta) * radius, y, Math.sin(theta) * radius);
+                particle.userData = {
+                    baseY: y,
+                    speed: 0.5 + Math.random() * 1.2,
+                    offset: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.04
+                };
+                scene.add(particle);
+                goldConfetti.push(particle);
+            }
+        }
+
+        // إطلاق دخان خفيف عند إطفاء الشموع
+        function spawnSmoke() {
+            const smokeGeo = new THREE.SphereGeometry(0.08, 10, 10);
+            const smokeMat = new THREE.MeshBasicMaterial({
+                color: 0xdcdcdc,
+                transparent: true,
+                opacity: 0.45
+            });
+
+            flames.forEach((flame) => {
+                const worldPos = new THREE.Vector3();
+                flame.getWorldPosition(worldPos);
+
+                for (let i = 0; i < 6; i++) {
+                    const puff = new THREE.Mesh(smokeGeo, smokeMat.clone());
+                    puff.position.copy(worldPos);
+                    puff.position.x += (Math.random() - 0.5) * 0.1;
+                    puff.position.z += (Math.random() - 0.5) * 0.1;
+                    puff.userData = {
+                        vy: 0.015 + Math.random() * 0.015,
+                        vx: (Math.random() - 0.5) * 0.008,
+                        life: 1.0
+                    };
+                    scene.add(puff);
+                    smokeParticles.push(puff);
+                }
+            });
+        }
+
+        // التبديل بين إطفاء وإعادة إشعال الشموع
+        function toggleCandles() {
+            const btn = document.getElementById('blow-candles-btn');
+            const celebrationBanner = document.getElementById('wish-celebration');
+
+            if (candlesLit) {
+                candlesLit = false;
+                flames.forEach(f => f.visible = false);
+                candleLights.forEach(l => l.intensity = 0);
+                spawnSmoke();
+
+                btn.textContent = 'إعادة إشعال الشموع';
+                celebrationBanner.classList.remove('opacity-0');
+                celebrationBanner.classList.add('opacity-100');
+            } else {
+                candlesLit = true;
+                flames.forEach(f => f.visible = true);
+                candleLights.forEach(l => l.intensity = 0.75);
+
+                btn.textContent = 'إطفاء الشموع';
+                celebrationBanner.classList.remove('opacity-100');
+                celebrationBanner.classList.add('opacity-0');
+            }
+        }
+
+        // إعادة الكاميرا لزاوية العرض المثالية
+        function resetCameraView() {
+            if (!camera || !controls) return;
+            controls.target.set(0, 1.8, 0);
+            onWindowResize();
+        }
+
+        // تحديث أبعاد المشهد عند تغيير حجم الشاشة
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            if (!container || !renderer || !camera) return;
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            if (!width || !height) return;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+            const distance = Math.max(10.5, 8.8 / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect));
+            const heightOffset = 3.4 * (distance / 10.5);
+            camera.position.set(0, controls.target.y + heightOffset, distance);
+            controls.maxDistance = Math.max(22, distance + 5);
+            controls.update();
+        }
+
+        // حلقة التحريك المستمرة (Animation Loop)
+        function animate3D() {
+            timer.update();
+            requestAnimationFrame(animate3D);
+            const elapsedTime = timer.getElapsed();
+
+            // دوران بطيء وهادئ للكعكة لإبراز تفاصيلها
+            if (cakeGroup) {
+                cakeGroup.rotation.y += 0.0025;
+                cakeGroup.position.y = Math.sin(elapsedTime * 0.8) * 0.025;
+            }
+
+            // حركة اهتزاز واقعية للهب الشموع
+            if (candlesLit) {
+                flames.forEach((flame, idx) => {
+                    const flicker = Math.sin(elapsedTime * 12 + idx * 2) * 0.08 + Math.cos(elapsedTime * 18 + idx) * 0.05;
+                    flame.scale.set(0.65 + flicker * 0.3, 1.7 + flicker, 0.65 + flicker * 0.3);
+                    flame.rotation.z = Math.sin(elapsedTime * 8 + idx) * 0.06;
+                });
+
+                candleLights.forEach((light, idx) => {
+                    light.intensity = 0.7 + Math.sin(elapsedTime * 15 + idx) * 0.12;
+                });
+            }
+
+            // تحريك الدخان المتصاعد بعد إطفاء الشموع
+            for (let i = smokeParticles.length - 1; i >= 0; i--) {
+                const p = smokeParticles[i];
+                p.position.y += p.userData.vy;
+                p.position.x += p.userData.vx + Math.sin(elapsedTime * 4 + i) * 0.003;
+                p.scale.multiplyScalar(1.015);
+                p.userData.life -= 0.012;
+                p.material.opacity = Math.max(0, p.userData.life * 0.45);
+
+                if (p.userData.life <= 0) {
+                    scene.remove(p);
+                    smokeParticles.splice(i, 1);
+                }
+            }
+
+            // تحريك الجسيمات الذهبية المحيطة بنعومة
+            goldConfetti.forEach((p) => {
+                p.position.y = p.userData.baseY + Math.sin(elapsedTime * p.userData.speed + p.userData.offset) * 0.25;
+                p.rotation.y += p.userData.rotSpeed;
+                p.rotation.x += p.userData.rotSpeed;
+            });
+
+            if (controls) controls.update();
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
+        }
+
+        window.navigateTo = navigateTo;
+        window.toggleCandles = toggleCandles;
+        window.resetCameraView = resetCameraView;
+    </script>
+</body>
+</html>
